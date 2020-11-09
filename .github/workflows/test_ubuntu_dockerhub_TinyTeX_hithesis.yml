@@ -1,4 +1,4 @@
-name: dockerhub-TinyTeX-hithesis
+name: ubuntu-dockerhub-TinyTeX-hithesis
 
 on:
   push:

@@ -16,7 +16,7 @@
 %
 % \iffalse
 %<*driver>
-\ProvidesFile{hithesis.dtx}[2020/06/11 3.0.2 Harbin Institute of Technology Thesis Template]
+\ProvidesFile{hithesis.dtx}[2020/11/02 3.0.12 Harbin Institute of Technology Thesis Template]
 \documentclass{ltxdoc}
 \usepackage{dtx-style}
 
@@ -186,9 +186,9 @@
 %
 % \subsection{生成模板}
 % \label{sec:generate-cls}
-% \note[提示：]{若使用 \TeX 发行版自带的 \hithesis\ 或 Gihitb/OSChina
+% \note[提示：]{若使用 \TeX 发行版自带的 \hithesis\ 或 Github/OSChina
 % 上发布的版本，可忽略此节，直接阅读第~\ref{sec:generate-thesis}节。若下载
-% CTAN 包或者 Gihitb/OSChina 开发代码，请阅读本节了解生成模板文件的步骤。}
+% CTAN 包或者 Github/OSChina 开发代码，请阅读本节了解生成模板文件的步骤。}
 %
 % 模板解压缩后生成文件夹 \file{hithesis-vX.Y.Z}\footnote{\texttt{vX.Y.Z} 为版本号。}，
 % 其中包括：模板源文件（\file{hithesis.ins} 和 \file{hithesis.dtx}），参考文献
@@ -289,7 +289,7 @@
 % 按照优先级推荐提问的位置如下：
 %
 % \begin{itemize}
-% \item \href{http://gihitb.com/dustincys/hithesis/issues}{Gihitb Issues}
+% \item \href{http://github.com/dustincys/hithesis/issues}{Github Issues}
 % \item \href{https://git.oschina.net/dustincys/hithesis/issues}{OSChina Issues}
 % \item hithesis QQ 讨论群：259959600
 % \end{itemize}
@@ -864,7 +864,7 @@
 % 授权页中的签名和日期是需要手写，不需要人工干预。具体示例在\file{main.tex}中。
 %\begin{latex}
 % \authorization %授权
-% %\authorization[saomiao.pdf] %添加扫描页的命令，与上互斥
+% %\authorization[scan.pdf] %添加扫描页的命令，与上互斥
 %\end{latex}
 %
 % \subsubsection{致谢声明}
@@ -2867,7 +2867,7 @@ EXECUTE {end.bib}                                 %   end_bib();
 %<bookcfg>\ProvidesFile{hithesisbook.cfg}
 %<artcfg>\ProvidesFile{hithesisart.cfg}
 %<hithesis-style>\ProvidesPackage{hithesis}
-%<artpluscls|artcls|bookcls|bookcfg|artcfg|hithesis-style>[2020/06/11 3.0.2 Harbin Institute of Technology Thesis Template]
+%<artpluscls|artcls|bookcls|bookcfg|artcfg|hithesis-style>[2020/11/02 3.0.12 Harbin Institute of Technology Thesis Template]
 %<*artpluscls>
 \RequirePackage{ifthen}
 \RequirePackage{kvoptions}
@@ -2999,7 +2999,11 @@ EXECUTE {end.bib}                                 %   end_bib();
 \RequirePackage{enumitem}       %使用enumitem宏包,改变列表项的格式
 \RequirePackage{environ}
 \RequirePackage[perpage,hang]{footmisc}
-\RequirePackage{CJKfntef}
+%    \end{macrocode}
+% CJKfntef包不再自动加载xeCJKfntef
+% \changes{v3.0.7}{2020/09/18}{CJKfntef包不再自动加载xeCJKfntef}
+%    \begin{macrocode}
+\RequirePackage{xeCJKfntef}
 
 \RequirePackage{longtable}
 \RequirePackage{booktabs}
@@ -3412,7 +3416,11 @@ EXECUTE {end.bib}                                 %   end_bib();
 \ifhit@pifootnote
   \RequirePackage{pifont}
 \fi
-\RequirePackage{CJKfntef}
+%    \end{macrocode}
+% CJKfntef包不再自动加载xeCJKfntef
+% \changes{v3.0.7}{2020/09/18}{CJKfntef包不再自动加载xeCJKfntef}
+%    \begin{macrocode}
+\RequirePackage{xeCJKfntef}
 
 \RequirePackage{longtable}
 \RequirePackage{booktabs}
@@ -3468,14 +3476,20 @@ EXECUTE {end.bib}                                 %   end_bib();
 \RequirePackage[subfigure]{ccaption} %支持双语标题
 \RequirePackage{xltxtra}
 
+%    \end{macrocode}
+% 设置深圳校区开题报告的正文行距与毕业论文模板一致
+% \changes{v3.0.4}{2020/07/29}{设置深圳校区开题报告的正文行距与毕业论文模板一致}
+% 此处修改与正文行距保持一致
+% \changes{v3.0.5}{2020/09/13}{此处修改与正文行距保持一致}
+%    \begin{macrocode}
 
-%-- 添加字号设置 --%
 \renewcommand\normalsize{%
-  \@setfontsize\normalsize{12bp}{15bp}%
-  \abovedisplayskip=6pt
-  \abovedisplayshortskip=6pt
+  \@setfontsize\normalsize{12bp}{20.50398bp}%
+  \abovedisplayskip=8pt
+  \abovedisplayshortskip=8pt
   \belowdisplayskip=\abovedisplayskip
   \belowdisplayshortskip=\abovedisplayshortskip}
+
 \def\hit@def@fontsize#1#2{%
   \expandafter\newcommand\csname #1\endcsname[1][1.3]{%
     \fontsize{#2}{##1\dimexpr #2}\selectfont}}
@@ -3499,8 +3513,10 @@ EXECUTE {end.bib}                                 %   end_bib();
 \hit@def@fontsize{qihao}{5.5bp}
 \hit@def@fontsize{bahao}{5bp}
 
-
-
+%    \end{macrocode}
+% 更改哈尔滨校区博士硕士开题节标题为小三号字体
+% \changes{v3.0.8}{2020/09/28}{更改哈尔滨校区博士硕士开题节标题为小三号字体}
+%    \begin{macrocode}
 
 %-- 设置字号 --%
 \ctexset{%
@@ -3508,7 +3524,7 @@ EXECUTE {end.bib}                                 %   end_bib();
     afterindent=true,
     beforeskip={7.5bp},%上下空0.5行
     afterskip={7.5bp},
-    format={\heiti\ifhit@harbin\sihao[1.25]\else\xiaosan[1.25]\fi},
+    format={\heiti\xiaosan[1.25]},
     aftername=\enspace,
     fixskip=true,
     break={},
@@ -3606,7 +3622,10 @@ EXECUTE {end.bib}                                 %   end_bib();
          \textbf{\hit@graduate@caffiltitle} & \underline{\makebox[6.1cm]{\textbf{\hit@caffil}}}\\
          \textbf{\hit@graduate@cmajortitle} & \underline{\makebox[6.1cm]{\textbf{\hit@csubject}}}\\
          \textbf{\hit@graduate@supervisor} & \underline{\makebox[6.1cm]{\textbf{\hit@csupervisor}}}\\
-         \textbf{\hit@graduate@studenttitle} & \underline{\makebox[6.1cm]{\textbf{\hit@cstudentid}}}\\
+%    \end{macrocode}
+% \changes{v3.0.3}{2020/07/03}{fix author name bug}
+%    \begin{macrocode}
+         \textbf{\hit@graduate@studenttitle} & \underline{\makebox[6.1cm]{\textbf{\hit@cauthor}}}\\
          \textbf{\hit@graduate@studentid} & \underline{\makebox[6.1cm]{\textbf{\hit@cstudentid}}}\\
          \textbf{\hit@graduate@datetitle} & \underline{\makebox[6.1cm]{\textbf{\hit@cdate}}}\\
        \end{tabular}\renewcommand{\arraystretch}{1}
@@ -3900,6 +3919,11 @@ EXECUTE {end.bib}                                 %   end_bib();
 %    \begin{macrocode}
 \DeclareBoolOption[false]{splitbibitem}
 %    \end{macrocode}
+% 此处添加英文目录开关
+% \changes{v3.0.11}{2020/10/29}{此处添加英文目录开关}
+%    \begin{macrocode}
+\DeclareBoolOption[false]{engtoc}
+%    \end{macrocode}
 % 声明字体选项。
 %    \begin{macrocode}
 \DeclareStringOption{fontset}
@@ -4044,10 +4068,10 @@ EXECUTE {end.bib}                                 %   end_bib();
   \RequirePackage{pifont}
 \fi
 %    \end{macrocode}
-% 利用 \pkg{CJKfntef} 实现汉字的下划线和盒子内两段对齐，并可以避免
+% 利用 \pkg{xeCJKfntef} 实现汉字的下划线和盒子内两段对齐，并可以避免
 % \cs{makebox}\oarg{width}\oarg{s} 可能产生的 underful boxes。
 %    \begin{macrocode}
-\RequirePackage{CJKfntef}
+\RequirePackage{xeCJKfntef}
 %    \end{macrocode}
 
 % 表格控制
@@ -4237,6 +4261,11 @@ delim_1 "\\hspace*{\\fill}"
   \@mainmatterfalse
   \pagenumbering{Roman}
   \pagestyle{hit@empty}
+%    \end{macrocode}
+% 窝工深圳模板范例，一行34个字
+% \changes{v3.0.11}{2020/10/29}{窝工深圳模板范例，一行34个字}
+%    \begin{macrocode}
+  \ziju{0.05416667}
 }
 %    \end{macrocode}
 % \end{macro}
@@ -4284,8 +4313,12 @@ delim_1 "\\hspace*{\\fill}"
 % 根据我工规定，正文小四号 (12bp) 字，行距为固定值3--4mm。
 %    \begin{macrocode}
 %<*bookcls>
+%    \end{macrocode}
+% 1bp = 1/72 inch, 1 inch = 25.4 mm
+% \changes{v3.0.10}{2020/10/28}{更改小数点后第五位，1bp = 1/72 inch, 1 inch = 25.4 mm}
+%    \begin{macrocode}
 \renewcommand\normalsize{%
-  \@setfontsize\normalsize{12bp}{\ifhit@glue 20.50398bp \@plus 2.83465bp \@minus 0bp\else 20.50398bp\fi}%
+  \@setfontsize\normalsize{12bp}{\ifhit@glue 20.50394bp \@plus 2.834646bp \@minus 0bp\else 20.50394bp\fi}%
   \abovedisplayskip=8pt
   \abovedisplayshortskip=8pt
   \belowdisplayskip=\abovedisplayskip
@@ -4454,7 +4487,17 @@ delim_1 "\\hspace*{\\fill}"
           \fancyhead[C]{\songti\xiaowu[0]\hit@cschoolname\hit@cdegree\hit@cthesisname}
         \fi
         \ifhit@shenzhen
-          \fancyhead[C]{\songti\xiaowu[0]\hit@cschoolname\hit@shenzhencampus\hit@cdegree\hit@cthesisname}
+%    \end{macrocode}
+% 根据窝工2020年深圳校区新规定，mainmatter之前都用正文内容作为页眉，之后都用哈尔
+% 滨工业大学作为页眉
+% \changes{v3.0.10}{2020/10/28}{根据窝工2020年深圳校区新规定，mainmatter之前都用正文内容作为页眉，之后都用哈尔
+% 滨工业大学作为页眉}
+%    \begin{macrocode}
+          \if@mainmatter
+            \fancyhead[C]{\songti\xiaowu[0]\hit@cschoolname\hit@cdegree\hit@cthesisname}
+          \else
+            \fancyhead[C]{\xiaowu[0]\leftmark}
+          \fi
         \fi
         \ifhit@weihai
           \fancyhead[C]{\songti\xiaowu[0]\hit@cschoolname\hit@weihaicampus\hit@cdegree\hit@cthesisname}
@@ -4773,12 +4816,13 @@ delim_1 "\\hspace*{\\fill}"
      \songti\sanhao\textbf{二〇一二年三月}
    \end{center}
 }
+%    \end{macrocode}
+% 此处删除了时间
+% \changes{v3.0.6}{2020/09/13}{此处删除了时间}
+%    \begin{macrocode}
 \newcommand{\hit@harbin@schoolbottommark}{
    \begin{center}
      \songti\sanhao\textbf{研究生院制}
-   \end{center}
-   \begin{center}
-     \songti\sanhao\textbf{二〇一四年九月}
    \end{center}
 }
 \newcommand{\hit@harbin@bachelor@schoolbottommark}{
@@ -5144,13 +5188,17 @@ delim_1 "\\hspace*{\\fill}"
 %    \end{macrocode}
 % 设置一到四级标题、目录、书签格式。
 %    \begin{macrocode}
+%    \end{macrocode}
+% 按照规范中规定行距的mm数定义各级行距
+% \changes{v3.0.10}{2020/10/28}{按照规范中规定行距的mm数定义各级行距}
+%    \begin{macrocode}
 \ifhit@english
   \ctexset{%
     chapter={
       afterindent=true,
       pagestyle={hit@headings},
-      beforeskip={28.34658bp},%一个空行 1.57481 × 18
-      afterskip={24.74658bp},%0.8应该不计算间距 0.8 × 18 + 0.57481×18
+      beforeskip={28.34646bp},%一个空行 1.57481 × 18
+      afterskip={28.74646bp},%0.8应该不计算间距 0.8 × 18 + 0.57481×18
       aftername={\par},
       format={\hit@chapter@engformat},
       nameformat={\hit@chapter@engnameformat},%\center 会影响之后全局
@@ -5161,8 +5209,8 @@ delim_1 "\\hspace*{\\fill}"
     },
     section={
       afterindent=true,
-      beforeskip={\ifhit@glue 13.5bp \@plus 1.677267bp \@minus 1.157391bp \else 13.5bp \fi},%上下空0.5行
-      afterskip={\ifhit@glue 13.5bp \@plus 1.677267bp \@minus 1.157391bp  \else 13.5bp \fi},
+      beforeskip={\ifhit@glue 19.84252bp \@plus 2.834646bp \@minus 0bp \else 19.84252bp \fi},%上下空0.5行
+      afterskip={\ifhit@glue 19.84252bp \@plus 2.834646bp \@minus 0bp \else 19.84252bp \fi},
       format={\hit@title@font\ifhit@glue\fontsize{15bp}{21bp \@plus 1.677267bp \@minus 1.157391bp}\else\fontsize{15bp}{21bp}\fi\selectfont\bfseries},
       aftername=\enspace,
       fixskip=true,
@@ -5170,8 +5218,8 @@ delim_1 "\\hspace*{\\fill}"
     },
     subsection={
       afterindent=true,
-      beforeskip={\ifhit@glue 11bp \@plus 1.842609bp \@minus 0.9920497bp \else 11bp \fi},
-      afterskip={\ifhit@glue 11bp \@plus 2.33863bp \@minus 0.49602bp \else 11bp \fi},
+      beforeskip={\ifhit@glue 17.00787bp \@plus 2.834646bp \@minus 0bp \else 17.00787bp \fi},
+      afterskip={\ifhit@glue 17.00787bp \@plus 2.834646bp \@minus 0bp \else 17.00787bp \fi},
       format={\hit@title@font\ifhit@glue\fontsize{14bp}{18bp \@plus 1.842609bp \@minus 0.9920497bp}\else\fontsize{14bp}{18bp}\fi\selectfont\bfseries},
       aftername=\enspace,
       fixskip=true,
@@ -5179,8 +5227,8 @@ delim_1 "\\hspace*{\\fill}"
     },
     subsubsection={
       afterindent=true,
-      beforeskip={\ifhit@glue 8.50398bp \@plus 2.83465bp \@minus 0bp \else 9bp \fi},
-      afterskip={\ifhit@glue 8.50398bp \@plus 2.83465bp \@minus 0bp \else 9bp \fi},
+      beforeskip={\ifhit@glue 8.503937bp \@plus 2.834646bp \@minus 0bp \else 8.503937bp \fi},
+      afterskip={\ifhit@glue 8.503937bp \@plus 2.834646bp \@minus 0bp \else 8.503937bp \fi},
       format={\hit@title@font\normalsize},
       aftername=\enspace,
       fixskip=true,
@@ -5195,8 +5243,8 @@ delim_1 "\\hspace*{\\fill}"
     chapter={
       afterindent=true,
       pagestyle={hit@headings},
-      beforeskip={28.34658bp},%一个空行 1.57481 × 18
-      afterskip={24.74658bp},%0.8应该不计算间距 0.8 × 18 + 0.57481×18
+      beforeskip={28.34646bp},%一个空行 1.57481 × 18
+      afterskip={28.74646bp},%0.8应该不计算间距 0.8 × 18 + 0.57481×18
       aftername=\enspace,
       format={\hit@chapter@postdocformat},%\center 会影响之后全局
       nameformat=\relax,
@@ -5207,8 +5255,8 @@ delim_1 "\\hspace*{\\fill}"
     },
     section={
       afterindent=true,
-      beforeskip={\ifhit@glue 13.5bp \@plus 1.677267bp \@minus 1.157391bp \else 13.5bp \fi},%上下空0.5行
-      afterskip={\ifhit@glue 13.5bp \@plus 1.677267bp \@minus 1.157391bp  \else 13.5bp \fi},
+      beforeskip={\ifhit@glue 19.84252bp \@plus 2.834646bp \@minus 0bp \else 19.84252bp \fi},%上下空0.5行
+      afterskip={\ifhit@glue 19.84252bp \@plus 2.834646bp \@minus 0bp \else 19.84252bp \fi},
       format={\hit@title@font\ifhit@glue\fontsize{15bp}{21bp \@plus 1.677267bp \@minus 1.157391bp}\else\fontsize{15bp}{21bp}\fi\selectfont\bfseries},
       aftername=\enspace,
       fixskip=true,
@@ -5216,8 +5264,8 @@ delim_1 "\\hspace*{\\fill}"
     },
     subsection={
       afterindent=true,
-      beforeskip={\ifhit@glue 11bp \@plus 1.842609bp \@minus 0.9920497bp \else 11bp \fi},
-      afterskip={\ifhit@glue 11bp \@plus 2.33863bp \@minus 0.49602bp \else 11bp \fi},
+      beforeskip={\ifhit@glue 17.00787bp \@plus 2.834646bp \@minus 0bp \else 17.00787bp \fi},
+      afterskip={\ifhit@glue 17.00787bp \@plus 2.834646bp \@minus 0bp \else 17.00787bp \fi},
       format={\hit@title@font\ifhit@glue\fontsize{14bp}{18bp \@plus 1.842609bp \@minus 0.9920497bp}\else\fontsize{14bp}{18bp}\fi\selectfont\bfseries},
       aftername=\enspace,
       fixskip=true,
@@ -5225,8 +5273,8 @@ delim_1 "\\hspace*{\\fill}"
     },
     subsubsection={
       afterindent=true,
-      beforeskip={\ifhit@glue 8.50398bp \@plus 2.83465bp \@minus 0bp \else 9bp \fi},
-      afterskip={\ifhit@glue 8.50398bp \@plus 2.83465bp \@minus 0bp \else 9bp \fi},
+      beforeskip={\ifhit@glue 8.503937bp \@plus 2.834646bp \@minus 0bp \else 8.503937bp \fi},
+      afterskip={\ifhit@glue 8.503937bp \@plus 2.834646bp \@minus 0bp \else 8.503937bp \fi},
       format={\hit@title@font\normalsize},
       aftername=\enspace,
       fixskip=true,
@@ -5241,8 +5289,8 @@ delim_1 "\\hspace*{\\fill}"
     chapter={
       afterindent=true,
       pagestyle={hit@headings},
-      beforeskip={28.34658bp},%一个空行 1.57481 × 18
-      afterskip={24.74658bp},%0.8应该不计算间距 0.8 × 18 + 0.57481×18
+      beforeskip={28.34646bp},%一个空行 1.57481 × 18
+      afterskip={28.74646bp},%0.8应该不计算间距 0.8 × 18 + 0.57481×18
       aftername=\enspace,
 %    \end{macrocode}
 % 添加本科生章标题加粗选项
@@ -5257,8 +5305,8 @@ delim_1 "\\hspace*{\\fill}"
     },
     section={
       afterindent=true,
-      beforeskip={\ifhit@glue 13.5bp \@plus 1.677267bp \@minus 1.157391bp \else 13.5bp \fi},%上下空0.5行
-      afterskip={\ifhit@glue 13.5bp \@plus 1.677267bp \@minus 1.157391bp  \else 13.5bp \fi},
+      beforeskip={\ifhit@glue 19.84252bp \@plus 2.834646bp \@minus 0bp \else 19.84252bp \fi},%上下空0.5行
+      afterskip={\ifhit@glue 19.84252bp \@plus 2.834646bp \@minus 0bp \else 19.84252bp \fi},
       format={\hit@title@font\ifhit@glue\fontsize{15bp}{21bp \@plus 1.677267bp \@minus 1.157391bp}\else\fontsize{15bp}{21bp}\fi\selectfont},
       aftername=\enspace,
       fixskip=true,
@@ -5266,8 +5314,8 @@ delim_1 "\\hspace*{\\fill}"
     },
     subsection={
       afterindent=true,
-      beforeskip={\ifhit@glue 11bp \@plus 1.842609bp \@minus 0.9920497bp \else 11bp \fi},
-      afterskip={\ifhit@glue 11bp \@plus 2.33863bp \@minus 0.49602bp \else 11bp \fi},
+      beforeskip={\ifhit@glue 17.00787bp \@plus 2.834646bp \@minus 0bp \else 17.00787bp \fi},
+      afterskip={\ifhit@glue 17.00787bp \@plus 2.834646bp \@minus 0bp \else 17.00787bp \fi},
       format={\hit@title@font\ifhit@glue\fontsize{14bp}{18bp \@plus 1.842609bp \@minus 0.9920497bp}\else\fontsize{14bp}{18bp}\fi\selectfont},
       aftername=\enspace,
       fixskip=true,
@@ -5275,8 +5323,8 @@ delim_1 "\\hspace*{\\fill}"
     },
     subsubsection={
       afterindent=true,
-      beforeskip={\ifhit@glue 8.50398bp \@plus 2.83465bp \@minus 0bp \else 9bp \fi},
-      afterskip={\ifhit@glue 8.50398bp \@plus 2.83465bp \@minus 0bp \else 9bp \fi},
+      beforeskip={\ifhit@glue 8.503937bp \@plus 2.834646bp \@minus 0bp \else 8.503937bp \fi},
+      afterskip={\ifhit@glue 8.503937bp \@plus 2.834646bp \@minus 0bp \else 8.503937bp \fi},
       format={\hit@title@font\normalsize},
       aftername=\enspace,
       fixskip=true,
@@ -5495,6 +5543,12 @@ delim_1 "\\hspace*{\\fill}"
 \hit@def@term{cdate}
 \hit@def@term{cnumber}
 \hit@def@term{cpositionname}
+%    \end{macrocode}
+% 添加博后封皮选项
+% \changes{v3.0.12}{2020/11/02}{添加博后封皮选项}
+%    \begin{macrocode}
+\hit@def@term{cfinishdate}
+\hit@def@term{csubmitdate}
 \hit@def@term{cstartdate}
 \hit@def@term{cenddate}
 %    \end{macrocode}
@@ -5589,7 +5643,11 @@ delim_1 "\\hspace*{\\fill}"
 
 
 \def\hit@postdoc@number{编号}
-\def\hit@postdoc@documenttitle{博\hspace{0.5\ccwd}士\hspace{0.5\ccwd}后\hspace{0.5\ccwd}研\hspace{0.5\ccwd}究\hspace{0.5\ccwd}工\hspace{0.5\ccwd}作\hspace{0.5\ccwd}报\hspace{0.5\ccwd}告}
+%    \end{macrocode}
+% 更改博后封皮中字间距
+% \changes{v3.0.12}{2020/11/02}{更改博后封皮中字间距}
+%    \begin{macrocode}
+\def\hit@postdoc@documenttitle{博\hspace{0.58\ccwd}士\hspace{0.58\ccwd}后\hspace{0.58\ccwd}研\hspace{0.58\ccwd}究\hspace{0.58\ccwd}工\hspace{0.58\ccwd}作\hspace{0.58\ccwd}报\hspace{0.58\ccwd}告}
 \def\hit@postdoc@documenttitlenospace{博士后研究工作报告}
 \def\hit@postdoc@finishdate{工作完成日期}
 \def\hit@postdoc@submitdate{报告提交日期}
@@ -5853,17 +5911,16 @@ delim_1 "\\hspace*{\\fill}"
 \def\hit@second@titlepage{%
   \ifhit@postdoc\hit@second@titlepage@postdoc\else\ifhit@bachelor\hit@second@titlepage@bachelor\else\hit@second@titlepage@other\fi\fi}
 
+%    \end{macrocode}
+% 添加博后封皮选项
+% \changes{v3.0.12}{2020/11/02}{添加博后封皮选项}
+%    \begin{macrocode}
 \newcommand{\hit@first@titlepage@postdoc}{
-  {\songti\sihao\renewcommand{\arraystretch}{2}
-    \hspace{1cm}\begin{tabular}{@{}r@{}l@{}}
-      \hit@postdoc@classifiedindex&\underline{\makebox[6\ccwd]{\hit@natclassifiedindex}}\\
-      \hit@postdoc@UDC&\underline{\makebox[6\ccwd]{\hit@intclassifiedindex}}\\
-    \end{tabular}}\hfill
-  {\songti\sihao\renewcommand{\arraystretch}{2}
-    \begin{tabular}{@{}r@{}l@{}}
-      \hit@postdoc@secretlevel&\underline{\makebox[6\ccwd]{\hit@statesecrets}}\\
-      \hit@postdoc@number&\underline{\makebox[6\ccwd]{\hit@cnumber}}\\
-    \end{tabular}\hspace{1cm}\renewcommand{\arraystretch}{1}}
+  {\songti\sihao\renewcommand{\arraystretch}{2}\
+    \begin{tabular}{@{}r@{}l@{\hspace{7\ccwd}}r@{}l@{\hspace{3em}}r}
+      \hit@postdoc@classifiedindex&\underline{\makebox[6\ccwd]{\hit@natclassifiedindex}}&\hit@postdoc@secretlevel&\underline{\makebox[6\ccwd]{\hit@statesecrets}}&\\
+      \hit@postdoc@UDC&\underline{\makebox[6\ccwd]{\hit@intclassifiedindex}}&\hit@postdoc@number&\underline{\makebox[6\ccwd]{\hit@cnumber}}&\\
+    \end{tabular}\renewcommand{\arraystretch}{1}}
   \parbox[t][5cm][b]{\textwidth}{\begin{center}\heiti\xiaoer[2]\hit@cschoolname\par
       \hit@postdoc@documenttitle\end{center}}
   \parbox[b][4cm][b]{\textwidth}{
@@ -5883,8 +5940,8 @@ delim_1 "\\hspace*{\\fill}"
     \songti\sihao[2]\renewcommand{\arraystretch}{1.5}
     \begin{center}
       \begin{tabular}{rl}
-        \hit@postdoc@finishdate & \underline{\makebox[6cm]{}}\\
-        \hit@postdoc@submitdate & \underline{\makebox[6cm]{}}\\
+        \hit@postdoc@finishdate & \underline{\makebox[6cm]{\hit@cfinishdate}}\\
+        \hit@postdoc@submitdate & \underline{\makebox[6cm]{\hit@csubmitdate\hfill}}\\
       \end{tabular}\renewcommand{\arraystretch}{1}
     \end{center}
     }
@@ -6157,9 +6214,20 @@ delim_1 "\\hspace*{\\fill}"
   U.D.C:  \hit@intclassifiedindex }
   \vspace*{1em}
   \begin{center}
+    %    \end{macrocode}
+% 深圳硕士英文封面第一行文字不同，修改。
+% \changes{v3.0.9}{2020/10/17}{深圳硕士英文封面第一行文字不同，修改。}
+%    \begin{macrocode}
   \parbox[t][1.6cm][t]{\textwidth}{\begin{center} \end{center} }
     \parbox[t][3.5cm][t]{\textwidth}{\xiaoer[1]
-  \begin{center}Dissertation for the {\hit@exueweier} Degree in \hit@exueke\end{center}
+      \begin{center}
+        \ifhit@shenzhen
+        \ifhit@master A dissertation submitted in partial fulfillment of\\ the requirements for the academic degree of\\ Master of Engineering
+        \else Dissertation for the {\hit@exueweier} Degree in \hit@exueke
+        \fi
+        \else Dissertation for the {\hit@exueweier} Degree in \hit@exueke
+        \fi
+      \end{center}
       \ifhit@fulltime\relax\else\begin{center}\hit@ebraceleft\hit@estudenttype\hit@ebraceright\end{center}\fi} %与中文保持一致，删除in {\hit@exueke}
     \parbox[t][7cm][t]{\textwidth}{%
    \begin{center}%
@@ -6322,6 +6390,14 @@ delim_1 "\\hspace*{\\fill}"
 \normalsize\@starttoc{toc}
 \ifhit@doctor
 \tableofengcontents
+%    \end{macrocode}
+% 有些硕士的范例中带有英文目录，这里添加手动开关
+% \changes{v3.0.11}{2020/10/29}{有些硕士的范例中带有英文目录，这里添加手动开关}
+%    \begin{macrocode}
+\else
+\ifhit@engtoc
+\tableofengcontents
+\fi
 \fi
 %    \end{macrocode}
 % 将英文目录潜入中文目录命令中，进一步简化thesis.tex结构
